@@ -11,7 +11,36 @@
   justify-content: center;
   align-items: center;
 }
-
+/* */
+.form {
+  width: 375px;
+}
+.form p label,
+.form p textarea,
+.form p input {
+  display: block;
+  width: 100%;
+}
+.form p label {
+  color: gray;
+  padding: 0 0 10px 0px;
+}
+.form p input {
+  padding: 0 10px;
+  height: 40px;
+}
+.form p textarea {
+  padding: 10px;
+  height: 120px;
+}
+.form p input {
+  display: block;
+  width: 100%;
+}
+.form button {
+  padding: 10px 20px;
+}
+/* */
 .footer {
   display: flex;
   flex: 1;

@@ -1,9 +1,20 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import Form from "./components/Form";
 
 export default function Home() {
+  async function handleOnSubmit(e) {
+    e.preventDefault();
+    const formData = {};
+    Array.from(e.currentTarget.elements).forEach((field) => {
+      if (!field.name) return;
+      formData[field.name] = field.value;
+    });
+    fetch("/api/mail", {
+      method: "post",
+      body: JSON.stringify(formData),
+    });
+    console.log(formData);
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -13,11 +24,25 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>Form</h1>
 
-        <Form />
+        <form method="post" onSubmit={handleOnSubmit} className={styles.form}>
+          <p>
+            <label htmlFor="name">Name</label>
+            <input type="text" name="name" />
+          </p>
+          <p>
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" />
+          </p>
+          <p>
+            <label htmlFor="message">Message</label>
+            <textarea name="message" />
+          </p>
+          <p>
+            <button>Submit</button>
+          </p>
+        </form>
       </main>
 
       <footer className={styles.footer}>
@@ -28,7 +53,7 @@ export default function Home() {
         >
           Powered by{" "}
           <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
